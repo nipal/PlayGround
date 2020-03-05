@@ -42,48 +42,53 @@ void setup()
   size(768, 432);
   bezier_setup();
   bus.list();
-  bus = new MidiBus(this, 1, 0);
+  bus = new MidiBus(this, 0, 0);
 }
 
 
 
 void draw()
 {
-     //print(noise(noise) + "\n");
       background(0);
-      stroke(255,0,255);
-        //fill(random(255),random(255),random(255));
-
       for (int b_i = 0; b_i < n_bezier; b_i++)
       {
               for (int i = 0; i < n_dot; i++)
               {
-                rect(x[b_i][i], y[b_i][i],3, 3);
+                  stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[4][2],cg * (y[b_i][i])/height + launchpad[5][2], cb * (x[b_i][i])/width + launchpad[6][2]);
+
+                  if (b_i % 12 == 0 || b_i % 12 == 1)
+                     rect(x[b_i][i], y[b_i][i],launchpad[4][0], launchpad[4][1]);
+                  if (b_i % 12 == 2 || b_i % 12 == 3)
+                     rect(x[b_i][i], y[b_i][i],launchpad[5][0], launchpad[5][1]);
+                  if (b_i % 12 == 5 || b_i % 12 == 6 || b_i % 12 == 7)
+                     rect(x[b_i][i], y[b_i][i],launchpad[6][0], launchpad[6][1]);
+                  if (b_i % 12 == 8 || b_i % 12 == 9 || b_i % 12 == 10 || b_i % 12 == 11)
+                     rect(x[b_i][i], y[b_i][i],launchpad[7][0], launchpad[7][1]);
+                  if (b_i % 12 == 4)
+                     rect(x[b_i][i], y[b_i][i],3,3);
               }
               for (int i = 0; i < n_dot - 2; i+=3)
               {
                 stroke((width - x[b_i][i] + y[b_i][i])*cr/width,cg * (y[b_i][i])/height, cb * (x[b_i][i+ 1])/width);
                 stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[0][0],cg * (y[b_i][i])/height + launchpad[0][1], cb * (x[b_i][i+ 1])/width + launchpad[0][2]);
                 bezier(x[b_i][i], y[b_i][i], x[b_i][i+ 1], y[b_i][i + 1],  x[b_i][i + 2], y[b_i][i + 2],  x[b_i][i + 3], y[b_i][i + 3]);
-                for (int j = 0; j < 2; j+=1)
+                for (int j = 0; j < 3; j+=1)
                 {
-                  for (int k = 0; k < 2; k += 1)
+                  for (int k = 0; k < 3; k += 1)
                   {
                     stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[0][0],cg * (y[b_i][i])/height + launchpad[0][1], cb * (x[b_i][i+ 1])/width + launchpad[0][2]);
                     bezier(x[b_i][i] + j, y[b_i][i] + k, x[b_i][i+ 1] + j, y[b_i][i + 1] + k,  x[b_i][i + 2] + j, y[b_i][i + 2] + k,  x[b_i][i + 3] + j, y[b_i][i + 3] + k);
-                    stroke((y[b_i][i + 1] + k)/3,  (x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] + k)/3);
+                    stroke(cb * (x[b_i][i+ 1])/width + launchpad[1][2], (width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[1][0],cg * (y[b_i][i])/height + launchpad[1][1]);
                     bezier(x[b_i][i] - j, y[b_i][i] + k, x[b_i][i+ 1] - j, y[b_i][i + 1] + k,  x[b_i][i + 2] - j, y[b_i][i + 2] + k,  x[b_i][i + 3] - j, y[b_i][i + 3] + k);
-                    stroke(k * j * 10,k*(j+k) * 10,k*j / (j + 1) + k * 10);
+                    stroke(cg * (y[b_i][i])/height + launchpad[2][1], cb * (x[b_i][i+ 1])/width + launchpad[2][2],(width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[2][0]);
                     bezier(x[b_i][i] + j, y[b_i][i] - k, x[b_i][i+ 1] + j, y[b_i][i + 1] - k,  x[b_i][i + 2] + j, y[b_i][i + 2] - k,  x[b_i][i + 3] + j, y[b_i][i + 3] - k);
-                    stroke((x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] - k)/3,  (x[b_i][i + 3] - j)/3);
+                    stroke((y[b_i][i] / height)*cr/width + launchpad[3][0],cg * (y[b_i][i])/height + launchpad[3][1], cb * (x[b_i][i+ 1])/width + launchpad[3][2]);
                     bezier(x[b_i][i] - j, y[b_i][i] - k, x[b_i][i+ 1] - j, y[b_i][i + 1] - k,  x[b_i][i + 2] - j, y[b_i][i + 2] - k,  x[b_i][i + 3] - j, y[b_i][i + 3] - k);
                   }
                 }
               }
               for (int i = 1; i<n_dot - 2; i++)
               {
-                  //x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * 100 - 00 + x[b_i][0];
-                  //y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * 100 - 00 + y[b_i][0];
                   if (b_i % 12 == 0 || b_i % 12 == 1)
                   {
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[1][3] / 128) - (100 * launchpad[1][3] / 128) + x[b_i][0];
@@ -117,8 +122,6 @@ void draw()
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36) + x[b_i][0];
                       y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36) + y[b_i][0];
                   }
-                  //x[b_i][i] = noise(noise + i * 1000 + b_i * 1000) * 768;
-                  //y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 1000) * 768;
               }
               for (int i = 4; i < n_dot - 1; i+= 3)
               {
