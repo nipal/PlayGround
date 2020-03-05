@@ -14,7 +14,7 @@ int[][] launchpad = {{0, 0, 0, 0, 0, 0, 0, 0},
 
 // Bezier shit bro
 int n_bezier = 24;
-int n_dot = 20;
+int n_dot = 8;
 float[][] x = new float[n_bezier][n_dot];
 float[][] y = new float[n_bezier][n_dot];
 float[] x_orig = {102, 246, 390, 486, 318, 54, 54, 150, 438, 534, 630, 654};
@@ -52,28 +52,33 @@ void draw()
      //print(noise(noise) + "\n");
       background(0);
       stroke(255,0,255);
-      
+        //fill(random(255),random(255),random(255));
+
       for (int b_i = 0; b_i < n_bezier; b_i++)
       {
+              for (int i = 0; i < n_dot; i++)
+              {
+                rect(x[b_i][i], y[b_i][i],3, 3);
+              }
               for (int i = 0; i < n_dot - 2; i+=3)
               {
                 stroke((width - x[b_i][i] + y[b_i][i])*cr/width,cg * (y[b_i][i])/height, cb * (x[b_i][i+ 1])/width);
                 stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[0][0],cg * (y[b_i][i])/height + launchpad[0][1], cb * (x[b_i][i+ 1])/width + launchpad[0][2]);
                 bezier(x[b_i][i], y[b_i][i], x[b_i][i+ 1], y[b_i][i + 1],  x[b_i][i + 2], y[b_i][i + 2],  x[b_i][i + 3], y[b_i][i + 3]);
-                //for (int j = 0; j < 1; j+=1)
-                //{
-                //  for (int k = 0; k < 1; k += 1)
-                //  {
-                //    stroke(255 - (x[b_i][i] + j)/3,(y[b_i][i] + k)/3, (x[b_i][i+ 1] + j)/3);
-                //    bezier(x[b_i][i] + j, y[b_i][i] + k, x[b_i][i+ 1] + j, y[b_i][i + 1] + k,  x[b_i][i + 2] + j, y[b_i][i + 2] + k,  x[b_i][i + 3] + j, y[b_i][i + 3] + k);
-                //    stroke((y[b_i][i + 1] + k)/3,  (x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] + k)/3);
-                //    bezier(x[b_i][i] - j, y[b_i][i] + k, x[b_i][i+ 1] - j, y[b_i][i + 1] + k,  x[b_i][i + 2] - j, y[b_i][i + 2] + k,  x[b_i][i + 3] - j, y[b_i][i + 3] + k);
-                //    stroke(k * j * 10,k*(j+k) * 10,k*j / (j + 1) + k * 10);
-                //    bezier(x[b_i][i] + j, y[b_i][i] - k, x[b_i][i+ 1] + j, y[b_i][i + 1] - k,  x[b_i][i + 2] + j, y[b_i][i + 2] - k,  x[b_i][i + 3] + j, y[b_i][i + 3] - k);
-                //    stroke((x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] - k)/3,  (x[b_i][i + 3] - j)/3);
-                //    bezier(x[b_i][i] - j, y[b_i][i] - k, x[b_i][i+ 1] - j, y[b_i][i + 1] - k,  x[b_i][i + 2] - j, y[b_i][i + 2] - k,  x[b_i][i + 3] - j, y[b_i][i + 3] - k);
-                //  }
-                //}
+                for (int j = 0; j < 2; j+=1)
+                {
+                  for (int k = 0; k < 2; k += 1)
+                  {
+                    stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[0][0],cg * (y[b_i][i])/height + launchpad[0][1], cb * (x[b_i][i+ 1])/width + launchpad[0][2]);
+                    bezier(x[b_i][i] + j, y[b_i][i] + k, x[b_i][i+ 1] + j, y[b_i][i + 1] + k,  x[b_i][i + 2] + j, y[b_i][i + 2] + k,  x[b_i][i + 3] + j, y[b_i][i + 3] + k);
+                    stroke((y[b_i][i + 1] + k)/3,  (x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] + k)/3);
+                    bezier(x[b_i][i] - j, y[b_i][i] + k, x[b_i][i+ 1] - j, y[b_i][i + 1] + k,  x[b_i][i + 2] - j, y[b_i][i + 2] + k,  x[b_i][i + 3] - j, y[b_i][i + 3] + k);
+                    stroke(k * j * 10,k*(j+k) * 10,k*j / (j + 1) + k * 10);
+                    bezier(x[b_i][i] + j, y[b_i][i] - k, x[b_i][i+ 1] + j, y[b_i][i + 1] - k,  x[b_i][i + 2] + j, y[b_i][i + 2] - k,  x[b_i][i + 3] + j, y[b_i][i + 3] - k);
+                    stroke((x[b_i][i + 2] - j)/3, 255- (y[b_i][i + 2] - k)/3,  (x[b_i][i + 3] - j)/3);
+                    bezier(x[b_i][i] - j, y[b_i][i] - k, x[b_i][i+ 1] - j, y[b_i][i + 1] - k,  x[b_i][i + 2] - j, y[b_i][i + 2] - k,  x[b_i][i + 3] - j, y[b_i][i + 3] - k);
+                  }
+                }
               }
               for (int i = 1; i<n_dot - 2; i++)
               {
@@ -81,29 +86,29 @@ void draw()
                   //y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * 100 - 00 + y[b_i][0];
                   if (b_i % 12 == 0 || b_i % 12 == 1)
                   {
-                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36 * launchpad[1][3] / 128) + x[b_i][0];
-                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36 * launchpad[1][3] / 128) + y[b_i][0];
+                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[1][3] / 128) - (100 * launchpad[1][3] / 128) + x[b_i][0];
+                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)* (200 * launchpad[1][3] / 128) - (100 * launchpad[1][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[0][3] / 2 * 2 + 1) - launchpad[0][3] / 2;
                       y[b_i][i] += random(launchpad[0][3] / 2 * 2 + 1) - launchpad[0][3] / 2;
                   }
                   if (b_i % 12 == 2 || b_i % 12 == 3)
                   {
-                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36 * launchpad[3][3] / 128) + x[b_i][0];
-                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36 * launchpad[3][3] / 128) + y[b_i][0];
+                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[3][3] / 128) - (100 * launchpad[3][3] / 128) + x[b_i][0];
+                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (200 * launchpad[3][3] / 128) - (100 * launchpad[3][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[2][3] / 2 * 2 + 1) - launchpad[2][3] / 2;
                       y[b_i][i] += random(launchpad[2][3] / 2 * 2 + 1) - launchpad[2][3] / 2;
                   }
                   if (b_i % 12 == 5 || b_i % 12 == 6 || b_i % 12 == 7)
                   {
-                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36 * launchpad[5][3] / 128) + x[b_i][0];
-                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36 * launchpad[5][3] / 128) + y[b_i][0];
+                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[5][3] / 128) - (100 * launchpad[5][3] / 128) + x[b_i][0];
+                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)  * (200 * launchpad[5][3] / 128) - (100 * launchpad[5][3] / 128)  + y[b_i][0];
                       x[b_i][i] += random(launchpad[4][3] / 2 * 2 + 1) - launchpad[4][3] / 2;
                       y[b_i][i] += random(launchpad[4][3] / 2 * 2 + 1) - launchpad[4][3] / 2;
                   }
                   if (b_i % 12 == 8 || b_i % 12 == 9 || b_i % 12 == 10 || b_i % 12 == 11)
                   {
-                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36 * launchpad[7][3] / 128) + x[b_i][0];
-                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36 * launchpad[7][3] / 128) + y[b_i][0];
+                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000)  * (200 * launchpad[7][3] / 128) - (100 * launchpad[7][3] / 128) + x[b_i][0];
+                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)  * (200 * launchpad[7][3] / 128) - (100 * launchpad[7][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[6][3] / 2 * 2 + 1) - launchpad[6][3] / 2;
                       y[b_i][i] += random(launchpad[6][3] / 2 * 2 + 1) - launchpad[6][3] / 2;
                   }

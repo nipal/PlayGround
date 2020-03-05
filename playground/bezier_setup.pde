@@ -10,8 +10,8 @@ void bezier_setup()
       //y[b_i][0] = random(768);
       for (int i = 1; i < n_dot - 1; i++)
       {
-          x[b_i][i] = x[b_i][i - 1] + int(random (10));
-          y[b_i][i] = y[b_i][i - 1] + int(random (10));
+          x[b_i][i] = x[b_i][i - 1] + int(30);
+          y[b_i][i] = y[b_i][i - 1] + int(20);
       }
       x[b_i][n_dot - 2] = x[b_i][0] + 100;
       y[b_i][n_dot - 2] = y[b_i][0] + 100;
