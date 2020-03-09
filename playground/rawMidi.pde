@@ -35,6 +35,7 @@ void rawMidi(byte[] data) { // You can also use rawMidi(byte[] data, String bus_
         x = 0;
       }
       launchpad[x][y] = value;
+      println("status", status, "chan", chan, "value", value);
       //println("chan[", x, "]: ", get_freq(x), " ", get_amp(x));
       //println("launchpad[", x, "][", y, "]:", value);
   }

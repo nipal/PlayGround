@@ -45,8 +45,6 @@ void setup()
   bus = new MidiBus(this, 0, 0);
 }
 
-
-
 void draw()
 {
       background(0);
