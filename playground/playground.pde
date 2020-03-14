@@ -13,6 +13,7 @@ int[][] launchpad = {{0, 0, 0, 0, 0, 0, 0, 0},
                       {0, 0, 0, 0, 0, 0, 0, 0}};
 
 // Bezier shit bro
+int n_cluster = 12;
 int n_bezier = 24;
 int n_dot = 8;
 float[][] x = new float[n_bezier][n_dot];
@@ -54,16 +55,14 @@ void draw()
               {
                   stroke((width - x[b_i][i] + y[b_i][i])*cr/width + launchpad[4][2],cg * (y[b_i][i])/height + launchpad[5][2], cb * (x[b_i][i])/width + launchpad[6][2]);
 
-                  if (b_i % 12 == 0 || b_i % 12 == 1)
+                  if (b_i % n_cluster >= 0 && b_i % n_cluster < int(n_cluster / 4))
                      rect(x[b_i][i], y[b_i][i],launchpad[4][0], launchpad[4][1]);
-                  if (b_i % 12 == 2 || b_i % 12 == 3)
+                  if (b_i % n_cluster >= int(n_cluster / 4) && b_i % n_cluster <  2 * int(n_cluster / 4))
                      rect(x[b_i][i], y[b_i][i],launchpad[5][0], launchpad[5][1]);
-                  if (b_i % 12 == 5 || b_i % 12 == 6 || b_i % 12 == 7)
+                  if (b_i % n_cluster >= 2 * int(n_cluster / 4) && b_i % n_cluster <  3 * int(n_cluster / 4))
                      rect(x[b_i][i], y[b_i][i],launchpad[6][0], launchpad[6][1]);
-                  if (b_i % 12 == 8 || b_i % 12 == 9 || b_i % 12 == 10 || b_i % 12 == 11)
+                  if (b_i % n_cluster >= 3 * int(n_cluster / 4) && b_i % n_cluster <  4 * int(n_cluster / 4))
                      rect(x[b_i][i], y[b_i][i],launchpad[7][0], launchpad[7][1]);
-                  if (b_i % 12 == 4)
-                     rect(x[b_i][i], y[b_i][i],3,3);
               }
               for (int i = 0; i < n_dot - 2; i+=3)
               {
@@ -87,38 +86,33 @@ void draw()
               }
               for (int i = 1; i<n_dot - 2; i++)
               {
-                  if (b_i % 12 == 0 || b_i % 12 == 1)
+                  if (b_i % n_cluster >= 0 && b_i % n_cluster < int(n_cluster / 4))
                   {
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[1][3] / 128) - (100 * launchpad[1][3] / 128) + x[b_i][0];
                       y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)* (200 * launchpad[1][3] / 128) - (100 * launchpad[1][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[0][3] / 2 * 2 + 1) - launchpad[0][3] / 2;
                       y[b_i][i] += random(launchpad[0][3] / 2 * 2 + 1) - launchpad[0][3] / 2;
                   }
-                  if (b_i % 12 == 2 || b_i % 12 == 3)
+                  if (b_i % n_cluster >= int(n_cluster / 4) && b_i % n_cluster <  2 * int(n_cluster / 4))
                   {
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[3][3] / 128) - (100 * launchpad[3][3] / 128) + x[b_i][0];
                       y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (200 * launchpad[3][3] / 128) - (100 * launchpad[3][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[2][3] / 2 * 2 + 1) - launchpad[2][3] / 2;
                       y[b_i][i] += random(launchpad[2][3] / 2 * 2 + 1) - launchpad[2][3] / 2;
                   }
-                  if (b_i % 12 == 5 || b_i % 12 == 6 || b_i % 12 == 7)
+                  if (b_i % n_cluster >= 2 * int(n_cluster / 4) && b_i % n_cluster <  3 * int(n_cluster / 4))
                   {
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (200 * launchpad[5][3] / 128) - (100 * launchpad[5][3] / 128) + x[b_i][0];
                       y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)  * (200 * launchpad[5][3] / 128) - (100 * launchpad[5][3] / 128)  + y[b_i][0];
                       x[b_i][i] += random(launchpad[4][3] / 2 * 2 + 1) - launchpad[4][3] / 2;
                       y[b_i][i] += random(launchpad[4][3] / 2 * 2 + 1) - launchpad[4][3] / 2;
                   }
-                  if (b_i % 12 == 8 || b_i % 12 == 9 || b_i % 12 == 10 || b_i % 12 == 11)
+                  if (b_i % n_cluster >= 3 * int(n_cluster / 4) && b_i % n_cluster <  4 * int(n_cluster / 4))
                   {
                       x[b_i][i] = noise(noise + i * 1000 + b_i * 10000)  * (200 * launchpad[7][3] / 128) - (100 * launchpad[7][3] / 128) + x[b_i][0];
                       y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000)  * (200 * launchpad[7][3] / 128) - (100 * launchpad[7][3] / 128) + y[b_i][0];
                       x[b_i][i] += random(launchpad[6][3] / 2 * 2 + 1) - launchpad[6][3] / 2;
                       y[b_i][i] += random(launchpad[6][3] / 2 * 2 + 1) - launchpad[6][3] / 2;
-                  }
-                  if (b_i % 12 == 4)
-                  {
-                      x[b_i][i] = noise(noise + i * 1000 + b_i * 10000) * (36) + x[b_i][0];
-                      y[b_i][i] = noise(noise + 1000 + i * 1000 + b_i * 10000) * (36) + y[b_i][0];
                   }
               }
               for (int i = 4; i < n_dot - 1; i+= 3)

@@ -3,7 +3,7 @@ void        mouseDragged()
     //if (mousePressed == true)
     //{
     println("lol");
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < n_cluster; i++)
         {
             if (pmouseX > x_orig[i] && pmouseX < x_dest[i]
                 && pmouseY > y_orig[i] && pmouseY < y_dest[i])
