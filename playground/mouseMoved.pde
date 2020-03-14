@@ -5,8 +5,8 @@ void        mouseDragged()
     println("lol");
         for (int i = 0; i < 12; i++)
         {
-            if (mouseX > x_orig[i] && mouseX < x_dest[i]
-                && mouseY > y_orig[i] && mouseY < y_dest[i])
+            if (pmouseX > x_orig[i] && pmouseX < x_dest[i]
+                && pmouseY > y_orig[i] && pmouseY < y_dest[i])
                 {
                     x_orig[i] += mouseX - pmouseX;
                     y_orig[i] += mouseY - pmouseY;
